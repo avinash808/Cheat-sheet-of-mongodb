@@ -1,0 +1,109 @@
+view all databases
+--> show databases
+
+create a new or switch databases
+--> use <dbname>
+
+view current databases
+-->db
+
+Delete databases
+-->db.dropdatabase()
+
+Mongodb commands for Collections
+--> Show Collections
+    show collections
+
+Create a collection named 'comments'
+-->db.createCollection('<collection_name')
+..........here collection name is " comments "
+
+delete a collection named 'comments'
+--> db.<collection_name>.drop()
+
+MongoDB commands for rows
+ Insert rows
+
+-->db.runCommand(
+   {
+      insert: "comments",
+      documents: [ {
+       name: "Avinash",
+       lang: "Pyhton",
+       member_since: 5 } ]
+   }
+)
+
+
+--> Insert multiple line rows
+
+db.runCommand(
+   {
+      insert: "comments",
+      documents: [{
+       name: "Ayush",
+       lang: "Python",
+       member_since: 7  },
+       {
+       name: "Abhay",
+       lang: "java",
+       member_since: 6  },
+       {
+       name: "mohan",
+       lang: "c language",
+       member_since: 3 }
+      ]})
+
+Show all rows in a Collection (Prettified)
+--> db.comments.find()
+
+ Find the first row matching the object
+--> db.comments.findOne()
+
+Search inn MongoDB
+--> db.comments.find({lang:'Python'})
+
+Limit the number of rows in output
+-->db.comments.find().limit(<insert_as per_choice>)
+we can't leave limit blank we have to put some  integer
+Like 0 which put no limit on the search
+
+count the number of row in the output
+--> db.comments.find().count()
+ Example -:
+    db.comments.find({name:'Avinash'}).limit(5).count()
+
+sorting the search
+--> db.comments.find().sort({member_since: 1 or -1})
+ Ascending order : 1
+ descending order : -1
+
+Update a row
+-->db.comments.update( {},
+ { $rename: {
+     "mohan": "Avinash"
+     } } )
+
+MongoDB Rename Operator
+-->db.runCommand(
+   {
+      rename: "comments",
+      documents: [ {
+       member_since:'member' } ]
+   }
+)
+
+Delete row
+--> db.comments.remove({name:'mohan'})
+
+Less than
+-->db.comments.find({member_since:{$lt:90}})
+
+Less than or eq
+-->db.comments.find({member_since: {$lte: 90}})
+
+greater than
+-->db.comments.find({member_since: {$gt: 90}})
+
+Greater thanor eq
+-->db.comments.find({member_since: {$gte: 90}})
